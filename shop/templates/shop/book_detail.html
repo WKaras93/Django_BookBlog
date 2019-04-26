@@ -1,0 +1,20 @@
+{% extends "shop/base.html" %}
+{% block content %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ book.author }}</a>
+        </div>
+        <h2>
+            <img class="rounded account-img" src="{{ object.image.url }}">
+            <a class="article-title" href="#">{{ object.title }}</a>
+        </h2>
+        <p class="article-content">{{ object.review }}</p>
+        <p class="article-content">Publisher: {{ object.publisher }}</p>
+        <p class="article-content">Publication date: {{ object.publication_date }}</p>
+        {% if object.create == user %}
+            <a class = "btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'book-update' object.id %}">Update</a>
+        {% endif %}
+    </div>
+</article>
+{% endblock content %}
