@@ -2,6 +2,13 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.forms import CheckboxSelectMultiple, ModelMultipleChoiceField, ModelForm
+
+class Tag(models.Model):
+    content = models.CharField(max_length = 100)
+
+    def __str__(self):
+        return self.content
 
 class Book(models.Model):
     title = models.CharField(max_length = 100)
@@ -27,12 +34,3 @@ class Post(models.Model):
 
     def __str__(self):
         return self.content
-
-class Tag(models.Model):
-    content = models.CharField(max_length = 100)
-
-    def __str__(self):
-        return self.content
-
-from django.contrib.auth.models import User
-from django.contrib.auth.models import User

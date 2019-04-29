@@ -7,11 +7,12 @@
         </div>
         <h2>
             <img class="rounded account-img" src="{{ object.image.url }}">
-            <a class="article-title" href="#">{{ object.title }}</a>
+            <a class="article-title">{{ object.title }}</a>
         </h2>
         <p class="article-content">{{ object.review }}</p>
         <p class="article-content">Publisher: {{ object.publisher }}</p>
         <p class="article-content">Publication date: {{ object.publication_date }}</p>
+        <p class="article-content">Tags: {{ object.tags.all }}</p>
         {% if object.create == user %}
             <a class = "btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'book-update' object.id %}">Update</a>
         {% endif %}

@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import DetailView, CreateView, UpdateView
-from . models import Book, Post
+from . models import Book, Post, Tag
+from django.forms.widgets import CheckboxSelectMultiple
     
 def home(request):
     context = {
@@ -14,7 +15,7 @@ class BookDetailView(DetailView):
 
 class BookCreateView(LoginRequiredMixin, CreateView):
     model = Book
-    fields = ['title', 'author', 'publisher', 'publication_date', 'review', 'image']
+    fields = ['title', 'author', 'publisher', 'publication_date', 'review', 'image', 'tags']
     
     def form_valid(self, form):
         form.instance.create = self.request.user
@@ -22,7 +23,7 @@ class BookCreateView(LoginRequiredMixin, CreateView):
 
 class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Book
-    fields = ['title', 'author', 'publisher', 'publication_date', 'review', 'image']
+    fields = ['title', 'author', 'publisher', 'publication_date', 'review', 'image', 'tags']
 
     def form_valid(self, form):
         form.instance.create = self.request.user

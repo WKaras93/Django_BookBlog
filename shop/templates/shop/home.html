@@ -11,8 +11,6 @@
             <a class="article-title" href="{% url 'book-detail' book.id %}">{{ book.title }}</a>
         </h2>
         <p class="article-content">{{ book.review }}</p>
-        <p class="article-content">Publisher: {{ book.publisher }}</p>
-        <p class="article-content">Publication date: {{ book.publication_date }}</p>
     </div>
 </article>
 {% endfor %}
