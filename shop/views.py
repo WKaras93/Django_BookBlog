@@ -42,5 +42,15 @@ class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['content']
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 def about(request):
     return render(request, 'shop/about.html')
+
+def bookJson(request):
+    return render(request, 'shop/bookJson.html')
