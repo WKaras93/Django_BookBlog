@@ -2,9 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import DetailView, CreateView, UpdateView
 from . models import Book, Post, Tag
-from django.forms.widgets import CheckboxSelectMultiple
 from django.core import serializers
-from django.http import JsonResponse
 from django.http import HttpResponse
 
 def home(request):
@@ -44,7 +42,7 @@ class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['content']
+    fields = ['content', 'book']
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)

@@ -24,7 +24,7 @@
         {% endif %}
 
         {% if user.is_authenticated %}
-            <a class="nav-item nav-link" href="{% url 'post-create' %}">Add post to review</a>
+            <a class="nav-item nav-link" href="{% url 'post-create' object.id%}">Add post to review</a>
         {% endif %}
     </div>
 </article>

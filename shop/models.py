@@ -19,6 +19,7 @@ class Book(models.Model):
     image = models.ImageField(default = 'defaultBook.jpg', upload_to = 'book_pics')
     create = models.ForeignKey(User, on_delete = models.CASCADE)
     tags = models.ManyToManyField('Tag')
+    
 
     def __str__(self):
         return '%s %s' % (self.title, self.author) 
