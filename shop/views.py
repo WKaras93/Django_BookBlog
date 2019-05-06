@@ -3,12 +3,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import DetailView, CreateView, UpdateView
 from . models import Book, Post, Tag
 from django.forms.widgets import CheckboxSelectMultiple
-    
+from django.core import serializers
+from django.http import JsonResponse
+from django.http import HttpResponse
+
 def home(request):
     context = {
         'books': Book.objects.all()
     }
     return render(request, 'shop/home.html', context)
+
+def get_books(request):
+    books = serializers.serialize('json', Book.objects.all())
+    return HttpResponse(books, content_type = 'application/json')
 
 class BookDetailView(DetailView):
     model = Book
