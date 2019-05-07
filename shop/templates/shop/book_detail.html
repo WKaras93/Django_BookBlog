@@ -19,10 +19,14 @@
             {% endfor %}
         </h6>
 
+        <h6>Comments:</h6>
         {% for comment in object.comments.all %}
-            <div class="comment">
-                <div class="date">{{ comment.date_comment }}</div>
-                <strong>{{ comment.author }}</strong>
+            <div class="comment border border-primary">
+                <h6>Author: 
+                    <strong>{{ comment.author }}</strong>
+                    , Date:
+                    {{ comment.date_comment }}
+                </h6>
                 <p>{{ comment.content|linebreaks }}</p>
             </div>
         {% empty %}

@@ -1,9 +1,14 @@
 {% extends "shop/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
-    <h1>New comment</h1>
-    <form method="POST" class="post-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Send</button>
-    </form>
+<article class="media content-section">
+    <div class="media-body">
+        <h1>Add comment</h1>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-outline-info">Add</button>
+        </form>
+    </div>
+</article>
 {% endblock %}

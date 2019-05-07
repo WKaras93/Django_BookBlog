@@ -55,13 +55,6 @@ class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
-# class CommentCreateView(LoginRequiredMixin, CreateView):
-#     model = Comment
-#     fields = ['content']
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
-
 def about(request):
     return render(request, 'shop/about.html')
 
