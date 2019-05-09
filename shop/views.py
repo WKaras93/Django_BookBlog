@@ -5,6 +5,8 @@ from .models import Book, Comment, Tag
 from django.core import serializers
 from django.http import HttpResponse
 from .forms import CommentForm
+from .serializer import TagSerializer
+from rest_framework import generics
 
 def home(request):
     context = {
@@ -54,6 +56,11 @@ class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == book.create:
             return True
         return False
+
+class ListTagView(generics.ListAPIView):
+    """ Provides a get method handler """
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
 
 def about(request):
     return render(request, 'shop/about.html')

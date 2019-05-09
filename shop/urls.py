@@ -10,5 +10,6 @@ urlpatterns = [
     path('book/new/', BookCreateView.as_view(), name = 'book-create'),
     path('book/<int:pk>/update/', BookUpdateView.as_view(), name = 'book-update'),
     path('book/<int:pk>/comment/', views.add_comment_to_book, name='comment-create'),
-    path('about/', views.about, name = 'shop-about')
+    path('about/', views.about, name = 'shop-about'),
+    path('bookTag/', views.ListTagView.as_view(), name="tags-all")
 ]
