@@ -1,11 +1,31 @@
-from rest_framework import generics
+from rest_framework import generics, mixins
 from shop.models import Book
 from .serializers import BookSerializer
+from .permissions import IsOwnerOrReadOnly
+
+class BookAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+    lookup_field = 'pk'
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+    #permission_classes = []
+
+    def perform_create(self, serializer):
+        serializer.save(create=self.request.user)
+    
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+    # def put(self, request, *args, **kwargs):
+    #     return self.update(request, *args, **kwargs)
+    
+    # def patch(self, request, *args, **kwargs):
+    #     return self.create(request, *args, **kwargs)
 
 class BookRudView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'pk'
     serializer_class = BookSerializer
-    queryset = Book.objects.all()
+    permission_classes = [IsOwnerOrReadOnly]
+    #queryset = Book.objects.all()
 
     def get_queryset(self):
         return Book.objects.all()

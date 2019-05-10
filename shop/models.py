@@ -25,6 +25,10 @@ class Book(models.Model):
     
     def get_absolute_url(self):
         return reverse("book-detail", kwargs={"pk": self.pk})
+    
+    @property
+    def owner(self):
+        return self.create
 
 class Comment(models.Model):
     content = models.TextField()
