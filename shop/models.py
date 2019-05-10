@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.forms import CheckboxSelectMultiple, ModelMultipleChoiceField, ModelForm
+from rest_framework.reverse import reverse as api_reverse
 
 class Tag(models.Model):
     content = models.CharField(max_length = 100)
@@ -25,6 +26,9 @@ class Book(models.Model):
     
     def get_absolute_url(self):
         return reverse("book-detail", kwargs={"pk": self.pk})
+    
+    def get_api_url(self, request=None):
+        return api_reverse("api-booking:book-rud", kwargs={"pk": self.pk}, request=request)
     
     @property
     def owner(self):

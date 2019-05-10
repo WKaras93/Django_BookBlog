@@ -1,6 +1,8 @@
 from rest_framework.test import APITestCase
 from django.contrib.auth import get_user_model
 from shop.models import Book
+from rest_framework.reverse import reverse as api_reverse
+from rest_framework import status
 
 
 User = get_user_model()
@@ -26,3 +28,9 @@ class BookAPITestCase(APITestCase):
     def test_single_post(self):
         book_count = Book.objects.count()
         self.assertEqual(book_count, 1)
+    
+    def test_get_item(self):
+        data = {}
+        url = api_reverse("api-booking:book-json-create")
+        response = self.client.get(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

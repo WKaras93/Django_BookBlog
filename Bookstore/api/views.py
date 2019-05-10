@@ -15,6 +15,9 @@ class BookAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
     
+    def get_serializer_context(self, *args, **kwargs):
+        return {"request": self.request}
+    
     # def put(self, request, *args, **kwargs):
     #     return self.update(request, *args, **kwargs)
     
@@ -29,6 +32,9 @@ class BookRudView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Book.objects.all()
+    
+    def get_serializer_context(self, *args, **kwargs):
+        return {"request": self.request}
     
     # def get_object(self):
     #     pk = self.kwargs.get("pk")
